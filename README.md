@@ -1,9 +1,11 @@
 # IA-PTX
 
-**IA-PTX** é um assistente de programação com IA via [Groq](https://groq.com/), com:
+**IA-PTX** é um assistente de programação com IA (padrão: [Groq](https://groq.com/)), com:
 
 - **CLI** de chat no terminal (Python)
 - **IDE desktop** (Tauri 2 + React + Monaco) com agent que lê, busca e edita arquivos do workspace
+
+Pode ser **adaptado para outros provedores** com API key (OpenAI, Gemini, OpenRouter, DeepSeek, Azure, etc.) — veja [Usar outros modelos / APIs](#usar-outros-modelos--apis).
 
 Interface inspirada em editores modernos com IA (estilo Cursor): explorer, abas, painel do agent, histórico de chats e barra de revisão de mudanças.
 
@@ -128,9 +130,102 @@ Arquivos binários (`.dat`, `.apk`, …) são bloqueados de propósito na leitur
 
 | Variável | Descrição |
 |----------|-----------|
-| `GROQ_API_KEY` | Chave da API Groq (obrigatória) |
+| `GROQ_API_KEY` | Chave da API Groq (obrigatória no setup padrão) |
 | `GROQ_MODEL` | ID do modelo (padrão `openai/gpt-oss-120b`) |
 | `GROQ_MAX_COMPLETION_TOKENS` | Máximo de tokens de saída (padrão `65536`) |
+
+---
+
+## Usar outros modelos / APIs
+
+O IA-PTX **não está preso à Groq**. O desktop fala o protocolo **OpenAI Chat Completions** (`POST …/v1/chat/completions` + `Authorization: Bearer …` + tools no formato function calling). Qualquer provedor compatível (ou com endpoint OpenAI-compatible) encaixa com pouca mudança.
+
+Exemplos: **OpenAI**, **Google Gemini** (endpoint OpenAI-compatible), **OpenRouter**, **DeepSeek**, **Azure OpenAI**, **Together**, **Fireworks**, etc.
+
+### Onde mexer
+
+| Camada | Arquivo | O que mudar |
+|--------|---------|-------------|
+| Desktop (agent) | `desktop/src-tauri/src/ai.rs` | URL da API, nome da env da key, modelo, e campos extras do body se o provedor exigir |
+| CLI | `src/config.py` + `src/groq_client.py` | Trocar SDK / base URL / key / modelo |
+| Env | `.env` / `.env.example` | Novas variáveis (`OPENAI_API_KEY`, `GEMINI_API_KEY`, …) |
+
+### Desktop — passo a passo
+
+1. No `.env`, troque (ou adicione) a chave e o modelo:
+
+```env
+# Exemplo OpenAI
+OPENAI_API_KEY=sk-sua_chave
+GROQ_MODEL=gpt-4.1
+# ou renomeie as envs no código para OPENAI_* / LLM_*
+```
+
+2. Em `ai.rs`, ajuste:
+
+- `api_key()` → ler `OPENAI_API_KEY` (ou a env do provedor)
+- `model()` → id do modelo (ex.: `gpt-4.1`, `gemini-2.0-flash`, `deepseek-chat`)
+- URL do `.post(...)` atual:
+
+```text
+https://api.groq.com/openai/v1/chat/completions
+```
+
+| Provedor | Endpoint típico |
+|----------|-----------------|
+| OpenAI | `https://api.openai.com/v1/chat/completions` |
+| Gemini (compatível OpenAI) | `https://generativelanguage.googleapis.com/v1beta/openai/chat/completions` |
+| OpenRouter | `https://openrouter.ai/api/v1/chat/completions` |
+| DeepSeek | `https://api.deepseek.com/v1/chat/completions` |
+| Groq (padrão) | `https://api.groq.com/openai/v1/chat/completions` |
+
+3. Mantenha o formato das **tools** (`type: function`) — a maioria dos provedores OpenAI-compatible aceita. Se o provedor não tiver function calling, o agent do desktop perde as tools de arquivo (aí é preciso adaptar o loop em `runAgent.ts`).
+
+4. Remova ou ignore campos específicos da Groq no body (ex.: `reasoning_effort`, se o outro provedor rejeitar).
+
+5. Rebuild / reinicie: `npm run tauri dev`.
+
+### CLI (Python) — passo a passo
+
+Hoje o CLI usa o SDK `groq`. Para outro provedor:
+
+1. Instale o SDK correspondente, ex.:
+
+```bash
+pip install openai          # OpenAI, OpenRouter, DeepSeek, Gemini OpenAI-compat…
+# ou
+pip install google-genai    # Gemini nativo
+```
+
+2. Em `src/config.py`, leia a nova key (`OPENAI_API_KEY`, `GEMINI_API_KEY`, …) e o modelo.
+
+3. Em `src/groq_client.py`, troque o cliente. Exemplo com SDK OpenAI apontando para outro host:
+
+```python
+from openai import OpenAI
+
+client = OpenAI(
+    api_key=os.getenv("OPENAI_API_KEY"),
+    base_url="https://api.openai.com/v1",  # ou URL do provedor
+)
+# client.chat.completions.create(model=..., messages=...)
+```
+
+Para Gemini via endpoint OpenAI-compatible:
+
+```python
+client = OpenAI(
+    api_key=os.getenv("GEMINI_API_KEY"),
+    base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
+)
+```
+
+### Dicas
+
+- Prefira modelos com **function calling** se quiser o agent editando arquivos.
+- Limites de TPM/contexto mudam por provedor — ajuste prompts e tamanho dos `write_file`.
+- Não commite a nova API key; só o `.env.example` com placeholders.
+- Ideal futuro: uma env única `LLM_BASE_URL` + `LLM_API_KEY` + `LLM_MODEL` (contribuições bem-vindas).
 
 ---
 
