@@ -1,17 +1,17 @@
-# Security Policy
+# Política de Segurança
 
-## Reporting a vulnerability
+## Reportar uma vulnerabilidade
 
-If you find a security issue in IA-PTX, please open a **private** security advisory on GitHub
-or contact the maintainers. Do **not** open a public issue with exploit details.
+Se encontrar um problema de segurança no IA-PTX, abra um **advisory privado** no GitHub
+ou contate os mantenedores. **Não** abra uma issue pública com detalhes de exploit.
 
-## Secrets
+## Segredos
 
-- Never commit `.env` files or API keys.
-- Use `.env.example` as a template only.
-- If a key is exposed, rotate it immediately in the [Groq Console](https://console.groq.com/).
+- Nunca faça commit de arquivos `.env` ou API keys.
+- Use o `.env.example` apenas como modelo.
+- Se uma chave vazar, rotacione imediatamente no [Console da Groq](https://console.groq.com/).
 
-## Local agent permissions
+## Permissões do agent local
 
-The desktop agent can read and write files **inside the opened workspace**.
-Treat untrusted prompts carefully — the model can request file edits via tools.
+O agent do desktop pode ler e escrever arquivos **dentro do workspace aberto**.
+Trate prompts não confiáveis com cuidado — o modelo pode pedir edições via tools.

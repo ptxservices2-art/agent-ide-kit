@@ -1,35 +1,35 @@
-# Architecture
+# Arquitetura
 
-IA-PTX has two surfaces that share the same Groq model configuration.
+O IA-PTX tem duas superfícies que compartilham a mesma configuração do modelo Groq.
 
 ```
 IA-PTX/
-├── main.py + src/          # CLI chat (Python + groq SDK)
-└── desktop/                # Desktop IDE (Tauri 2)
-    ├── src/                # React + TypeScript UI
-    └── src-tauri/          # Rust backend (FS + Groq HTTP + chat store)
+├── main.py + src/          # Chat CLI (Python + SDK groq)
+└── desktop/                # IDE Desktop (Tauri 2)
+    ├── src/                # UI React + TypeScript
+    └── src-tauri/          # Backend Rust (FS + HTTP Groq + store de chats)
 ```
 
-## Desktop data flow
+## Fluxo de dados do Desktop
 
-1. UI (`AgentPanel`) sends user prompts to `runAgent`.
-2. `runAgent` loops: call `agent_turn` (Rust) → execute tools locally → append results.
-3. Rust `agent_turn` calls Groq Chat Completions with function tools.
-4. Tools (`list_dir`, `read_file`, `write_file`, `str_replace`, `search_files`) run in Rust against the opened workspace (path sandbox).
-5. Chat sessions persist under `{workspace}/.ia-ptx/chats.json`.
+1. A UI (`AgentPanel`) envia prompts do usuário para `runAgent`.
+2. `runAgent` faz o loop: chama `agent_turn` (Rust) → executa tools localmente → anexa resultados.
+3. O Rust `agent_turn` chama a Groq Chat Completions com function tools.
+4. As tools (`list_dir`, `read_file`, `write_file`, `str_replace`, `search_files`) rodam em Rust no workspace aberto (sandbox de path).
+5. As sessões de chat ficam em `{workspace}/.ia-ptx/chats.json`.
 
-## Configuration
+## Configuração
 
-| Variable | Purpose | Default |
-|----------|---------|---------|
-| `GROQ_API_KEY` | Groq API key | required |
-| `GROQ_MODEL` | Model id | `openai/gpt-oss-120b` |
-| `GROQ_MAX_COMPLETION_TOKENS` | Max output tokens | `65536` |
+| Variável | Finalidade | Padrão |
+|----------|------------|--------|
+| `GROQ_API_KEY` | Chave da API Groq | obrigatória |
+| `GROQ_MODEL` | ID do modelo | `openai/gpt-oss-120b` |
+| `GROQ_MAX_COMPLETION_TOKENS` | Máximo de tokens de saída | `65536` |
 
-Loaded from `apps/IA-PTX/.env` (CLI) and the same file relative to the Tauri crate (`../.env`).
+Carregadas do `.env` na raiz do projeto (CLI) e do mesmo arquivo relativo ao crate Tauri (`../.env`).
 
-## Security model
+## Modelo de segurança
 
-- File access is restricted to the selected workspace root.
-- Binary-like extensions are blocked from agent `read_file`.
-- API keys must stay in `.env` (gitignored).
+- Acesso a arquivos restrito à raiz do workspace selecionado.
+- Extensões tipicamente binárias são bloqueadas no `read_file` do agent.
+- API keys devem ficar só no `.env` (gitignored).
