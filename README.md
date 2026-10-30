@@ -1,11 +1,13 @@
-# IA-PTX
+# agent-ide-kit
 
-**IA-PTX** é um assistente de programação com IA (padrão: [Groq](https://groq.com/)), com:
+> **Modelo de IDE com IA** — kit open source estilo Cursor para clonar, adaptar e plugar a API que quiser.
+
+**agent-ide-kit** é um kit completo de IDE + agent de código (padrão: [Groq](https://groq.com/)), com:
 
 - **CLI** de chat no terminal (Python)
 - **IDE desktop** (Tauri 2 + React + Monaco) com agent que lê, busca e edita arquivos do workspace
 
-Pode ser **adaptado para outros provedores** com API key (OpenAI, Gemini, OpenRouter, DeepSeek, Azure, etc.) — veja [Usar outros modelos / APIs](#usar-outros-modelos--apis).
+Serve como **ponto de partida**: fork, troca a API key / provedor e customiza a UI. Funciona com OpenAI, Gemini, OpenRouter, DeepSeek, Azure e outros — veja [Usar outros modelos / APIs](#usar-outros-modelos--apis).
 
 Interface inspirada em editores modernos com IA (estilo Cursor): explorer, abas, painel do agent, histórico de chats e barra de revisão de mudanças.
 
@@ -67,8 +69,8 @@ Pré-requisitos do Tauri: veja o [guia oficial](https://v2.tauri.app/start/).
 ### 1) Clonar e configurar
 
 ```bash
-git clone https://github.com/ptxservices2-art/IA-PTX.git
-cd IA-PTX
+git clone https://github.com/ptxservices2-art/agent-ide-kit.git
+cd agent-ide-kit
 
 cp .env.example .env
 # Edite o .env e coloque sua GROQ_API_KEY
@@ -138,7 +140,7 @@ Arquivos binários (`.dat`, `.apk`, …) são bloqueados de propósito na leitur
 
 ## Usar outros modelos / APIs
 
-O IA-PTX **não está preso à Groq**. O desktop fala o protocolo **OpenAI Chat Completions** (`POST …/v1/chat/completions` + `Authorization: Bearer …` + tools no formato function calling). Qualquer provedor compatível (ou com endpoint OpenAI-compatible) encaixa com pouca mudança.
+O **agent-ide-kit** **não está preso à Groq**. O desktop fala o protocolo **OpenAI Chat Completions** (`POST …/v1/chat/completions` + `Authorization: Bearer …` + tools no formato function calling). Qualquer provedor compatível (ou com endpoint OpenAI-compatible) encaixa com pouca mudança.
 
 Exemplos: **OpenAI**, **Google Gemini** (endpoint OpenAI-compatible), **OpenRouter**, **DeepSeek**, **Azure OpenAI**, **Together**, **Fireworks**, etc.
 
@@ -255,7 +257,7 @@ client = OpenAI(
 
 ## Licença
 
-MIT © contribuidores IA-PTX — veja [LICENSE](LICENSE).
+MIT © contribuidores agent-ide-kit — veja [LICENSE](LICENSE).
 
 ---
 
