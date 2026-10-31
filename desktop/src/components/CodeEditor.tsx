@@ -100,7 +100,7 @@ export function CodeEditor({
           />
         ) : (
           <div className="empty-editor">
-            <div className="empty-brand">IA-PTX</div>
+            <div className="empty-brand">agent-ide-kit</div>
             <p>Abra uma pasta na barra lateral e comece a editar.</p>
             <p className="muted">O Agent à direita pode criar e alterar arquivos.</p>
           </div>

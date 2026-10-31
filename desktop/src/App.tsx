@@ -7,7 +7,7 @@ import { Explorer } from "./components/Explorer";
 import { TitleBar } from "./components/TitleBar";
 import "./App.css";
 
-const WS_KEY = "ia-ptx-workspace";
+const WS_KEY = "agent-ide-kit-workspace";
 
 export default function App() {
   const [workspace, setWorkspace] = useState<string | null>(null);
@@ -167,12 +167,12 @@ export default function App() {
 
   const workspaceName = workspace
     ? workspace.replace(/\\/g, "/").split("/").filter(Boolean).pop()
-    : "IA-PTX";
+    : "agent-ide-kit";
 
   return (
     <div className="ide">
       <TitleBar
-        title={workspaceName || "IA-PTX"}
+        title={workspaceName || "agent-ide-kit"}
         canSave={dirty}
         sidebarOpen={sidebar === "explorer"}
         agentOpen={agentOpen}
@@ -256,7 +256,7 @@ export default function App() {
       </div>
 
       <footer className="statusbar">
-        <span className="sb-item brand-sb">IA-PTX</span>
+        <span className="sb-item brand-sb">agent-ide-kit</span>
         <span className="sb-item">{dirty ? "● não salvo" : "pronto"}</span>
         <span className="sb-spacer" />
         <span className="sb-item truncate">{status}</span>

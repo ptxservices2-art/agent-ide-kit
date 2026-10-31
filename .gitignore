@@ -34,7 +34,7 @@ Thumbs.db
 *~
 
 # App data local
-**/.ia-ptx/
+**/.agent-ide-kit/
 desktop/src-tauri/gen/
 
 # Build artifacts

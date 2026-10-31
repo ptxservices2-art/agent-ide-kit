@@ -11,7 +11,7 @@ GROQ_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
 GROQ_MAX_COMPLETION_TOKENS = int(os.getenv("GROQ_MAX_COMPLETION_TOKENS", "65536"))
 
 SYSTEM_PROMPT = (
-    "Você é a IA-PTX, assistente do ecossistema PTX. "
+    "Você é o agent-ide-kit, assistente de programação. "
     "Responda em português brasileiro, de forma clara e objetiva. "
     "Quando usar ferramentas (código ou busca), explique o raciocínio de forma útil."
 )

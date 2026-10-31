@@ -2,7 +2,7 @@
 
 ## Reportar uma vulnerabilidade
 
-Se encontrar um problema de segurança no IA-PTX, abra um **advisory privado** no GitHub
+Se encontrar um problema de segurança no agent-ide-kit, abra um **advisory privado** no GitHub
 ou contate os mantenedores. **Não** abra uma issue pública com detalhes de exploit.
 
 ## Segredos

@@ -5,7 +5,7 @@ fn store_path(workspace: &str) -> Result<PathBuf, String> {
     let root = PathBuf::from(workspace)
         .canonicalize()
         .map_err(|e| format!("workspace inválido: {e}"))?;
-    Ok(root.join(".ia-ptx").join("chats.json"))
+    Ok(root.join(".agent-ide-kit").join("chats.json"))
 }
 
 #[tauri::command]

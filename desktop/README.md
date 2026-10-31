@@ -1,11 +1,11 @@
-# IA-PTX Desktop
+# agent-ide-kit Desktop
 
 IDE estilo Cursor (Tauri 2 + React + Monaco) com **Agent** que lê/edita arquivos via Groq.
 
 ## Dev
 
 ```bat
-cd apps\IA-PTX\desktop
+cd desktop
 npm install
 npm run tauri dev
 ```

@@ -49,11 +49,11 @@ const MENUS: { id: string; label: string; items: { label: string; action?: strin
   { id: "go", label: "Go", items: [{ label: "Go to File…", disabled: true }] },
   { id: "run", label: "Run", items: [{ label: "Run Agent", disabled: true }] },
   { id: "terminal", label: "Terminal", items: [{ label: "New Terminal", disabled: true }] },
-  { id: "help", label: "Help", items: [{ label: "About IA-PTX", action: "about" }] },
+  { id: "help", label: "Help", items: [{ label: "About agent-ide-kit", action: "about" }] },
 ];
 
 export function TitleBar({
-  title = "IA-PTX",
+  title = "agent-ide-kit",
   canSave,
   sidebarOpen,
   agentOpen,
@@ -92,14 +92,14 @@ export function TitleBar({
     if (action === "save" && canSave) onSave();
     if (action === "toggleSidebar") onToggleSidebar();
     if (action === "toggleAgent") onToggleAgent();
-    if (action === "about") alert("IA-PTX — IDE com Agent Groq");
+    if (action === "about") alert("agent-ide-kit — IDE com Agent Groq");
     if (action === "exit") await getCurrentWindow().close();
   }
 
   return (
     <header className="titlebar" ref={rootRef} data-tauri-drag-region>
       <div className="tb-left" data-tauri-drag-region>
-        <div className="tb-logo" title="IA-PTX" data-tauri-drag-region>
+        <div className="tb-logo" title="agent-ide-kit" data-tauri-drag-region>
           <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden>
             <path
               fill="#e8e8e8"
@@ -171,7 +171,7 @@ export function TitleBar({
         <button type="button" className="tb-icon" title="Forward" disabled>
           →
         </button>
-        <span className="tb-profile">IA-PTX</span>
+        <span className="tb-profile">agent-ide-kit</span>
         <button
           type="button"
           className={`tb-icon${agentOpen ? " on" : ""}`}

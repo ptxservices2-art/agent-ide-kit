@@ -1,4 +1,4 @@
-# Contribuindo para o IA-PTX
+# Contribuindo para o agent-ide-kit
 
 Obrigado por contribuir.
 

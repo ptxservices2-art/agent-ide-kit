@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "IA-PTX",
+  "productName": "agent-ide-kit",
   "version": "0.1.0",
-  "identifier": "com.ptx.ia",
+  "identifier": "com.ptx.agentidekit",
   "build": {
     "beforeDevCommand": "npm run dev",
     "devUrl": "http://localhost:1420",
@@ -13,7 +13,7 @@
     "windows": [
       {
         "label": "main",
-        "title": "IA-PTX",
+        "title": "agent-ide-kit",
         "width": 1440,
         "height": 900,
         "minWidth": 960,

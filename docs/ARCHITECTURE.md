@@ -1,9 +1,9 @@
 # Arquitetura
 
-O IA-PTX tem duas superfícies que compartilham a mesma configuração do modelo Groq.
+O agent-ide-kit tem duas superfícies que compartilham a mesma configuração do modelo Groq.
 
 ```
-IA-PTX/
+agent-ide-kit/
 ├── main.py + src/          # Chat CLI (Python + SDK groq)
 └── desktop/                # IDE Desktop (Tauri 2)
     ├── src/                # UI React + TypeScript
@@ -16,7 +16,7 @@ IA-PTX/
 2. `runAgent` faz o loop: chama `agent_turn` (Rust) → executa tools localmente → anexa resultados.
 3. O Rust `agent_turn` chama a Groq Chat Completions com function tools.
 4. As tools (`list_dir`, `read_file`, `write_file`, `str_replace`, `search_files`) rodam em Rust no workspace aberto (sandbox de path).
-5. As sessões de chat ficam em `{workspace}/.ia-ptx/chats.json`.
+5. As sessões de chat ficam em `{workspace}/.agent-ide-kit/chats.json`.
 
 ## Configuração
 

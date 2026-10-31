@@ -2,5 +2,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    ia_ptx_lib::run();
+    agent_ide_kit_lib::run();
 }

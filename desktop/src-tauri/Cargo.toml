@@ -1,12 +1,12 @@
 [package]
-name = "ia-ptx"
+name = "agent-ide-kit"
 version = "0.1.0"
-description = "IA-PTX — IDE personalizada com Groq"
+description = "agent-ide-kit — IDE personalizada com Groq"
 authors = ["PTX"]
 edition = "2021"
 
 [lib]
-name = "ia_ptx_lib"
+name = "agent_ide_kit_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]

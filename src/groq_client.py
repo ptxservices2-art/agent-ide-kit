@@ -12,8 +12,8 @@ DEFAULT_TOOLS: list[dict[str, Any]] = [
 ]
 
 
-class IAPtx:
-    """Cliente da IA-PTX via Groq."""
+class AgentIdeKit:
+    """Cliente da agent-ide-kit via Groq."""
 
     def __init__(
         self,

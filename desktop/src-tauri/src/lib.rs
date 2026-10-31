@@ -22,5 +22,5 @@ pub fn run() {
             ai::ai_status,
         ])
         .run(tauri::generate_context!())
-        .expect("erro ao iniciar IA-PTX");
+        .expect("erro ao iniciar agent-ide-kit");
 }

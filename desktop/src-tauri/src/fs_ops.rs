@@ -193,7 +193,7 @@ pub fn list_dir(workspace: String, path: Option<String>) -> Result<Vec<DirEntry>
         let meta = entry.metadata().map_err(|e| e.to_string())?;
         let name = entry.file_name().to_string_lossy().to_string();
         // Explorer mostra tudo (como Cursor), esconde metadados internos
-        if name == ".git" || name == ".ia-ptx" {
+        if name == ".git" || name == ".agent-ide-kit" {
             continue;
         }
         entries.push(DirEntry {

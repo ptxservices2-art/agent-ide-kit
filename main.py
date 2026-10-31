@@ -1,5 +1,5 @@
 """
-IA-PTX — chat interativo com a API Groq.
+agent-ide-kit — chat interativo com a API Groq.
 
 Comandos:
   /sair   encerra
@@ -11,14 +11,14 @@ from __future__ import annotations
 
 import sys
 
-from src.groq_client import IAPtx
+from src.groq_client import AgentIdeKit
 
 
 def main() -> int:
-    ia = IAPtx(use_tools=True)
+    ia = AgentIdeKit(use_tools=True)
 
     print("=" * 50)
-    print("  IA-PTX  |  modelo:", ia.model)
+    print("  agent-ide-kit  |  modelo:", ia.model)
     print("  Digite sua mensagem. /sair para encerrar.")
     print("=" * 50)
 
@@ -46,7 +46,7 @@ def main() -> int:
             print(f"Ferramentas {estado}.")
             continue
 
-        print("\nIA-PTX: ", end="", flush=True)
+        print("\nagent-ide-kit: ", end="", flush=True)
         try:
             for piece in ia.ask_stream(user):
                 print(piece, end="", flush=True)

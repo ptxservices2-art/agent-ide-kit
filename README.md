@@ -28,7 +28,7 @@ Interface inspirada em editores modernos com IA (estilo Cursor): explorer, abas,
 - Editor Monaco com múltiplas abas
 - **Agent** com tools:
   - `list_dir` · `read_file` · `write_file` · `str_replace` · `search_files`
-- Chats persistentes por workspace (`.ia-ptx/chats.json`)
+- Chats persistentes por workspace (`.agent-ide-kit/chats.json`)
 - Novo chat sem apagar o histórico
 - Barra de revisão: desfazer / salvar / revisar edições do agent
 - UI dark no estilo Cursor
@@ -38,7 +38,7 @@ Interface inspirada em editores modernos com IA (estilo Cursor): explorer, abas,
 ## Estrutura do repositório
 
 ```text
-IA-PTX/
+agent-ide-kit/
 ├── main.py                 # Entrada do CLI
 ├── src/                    # Cliente Python da Groq
 ├── requirements.txt

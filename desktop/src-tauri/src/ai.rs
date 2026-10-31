@@ -31,7 +31,7 @@ fn load_env() {
 fn api_key() -> Result<String, String> {
     load_env();
     env::var("GROQ_API_KEY")
-        .map_err(|_| "GROQ_API_KEY não definida. Coloque no .env em apps/IA-PTX/.env".into())
+        .map_err(|_| "GROQ_API_KEY não definida. Coloque no .env na raiz do projeto.".into())
 }
 
 fn model() -> String {
@@ -128,7 +128,7 @@ fn agent_tools() -> Value {
     ])
 }
 
-const AGENT_SYSTEM: &str = "Você é o Agent da IA-PTX, coding agent numa IDE.\n\
+const AGENT_SYSTEM: &str = "Você é o Agent do agent-ide-kit, coding agent numa IDE.\n\
 Responda em português, objetivo.\n\
 Tools: list_dir, read_file, write_file, str_replace, search_files.\n\
 Regras:\n\

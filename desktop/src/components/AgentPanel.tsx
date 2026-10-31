@@ -342,7 +342,7 @@ export function AgentPanel({
         {items.length === 0 && (
           <div className="chat-empty">
             <p>{active?.title || "Novo chat"}</p>
-            <span>Os chats ficam salvos neste workspace (.ia-ptx).</span>
+            <span>Os chats ficam salvos neste workspace (.agent-ide-kit).</span>
           </div>
         )}
 
